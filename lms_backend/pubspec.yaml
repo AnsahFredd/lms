@@ -1,0 +1,79 @@
+name: lms_backend
+description: >
+  LMS Dart backend — Shelf HTTP server, GraphQL (graphql_server3),
+  PostgreSQL, Clean Architecture + Feature-First organisation.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+# PRODUCTION DEPENDENCIES
+dependencies:
+
+  # Core HTTP server pipeline.
+  shelf: ^1.4.2
+  # Type-safe route declarations for Shelf.
+  shelf_router: ^1.1.4
+  # CORS middleware for Shelf — allows Flutter/web clients.
+  shelf_cors_headers: ^0.1.5
+  # Framework-agnostic GraphQL execution engine for Dart.
+  graphql_server3: ^3.0.0
+  # GraphQL schema definition helpers (types, fields, resolvers).
+  graphql_schema3: ^3.0.0
+
+  # Official Dart PostgreSQL driver with connection pooling.
+  postgres: ^3.4.4
+
+  # JWT creation and verification.
+  dart_jsonwebtoken: ^2.14.2
+  # Cryptographic utilities — HMAC-SHA256, SHA-512, etc.
+  crypto: ^3.0.6
+  # BCrypt password hashing for stored credentials.
+  bcrypt: ^1.1.3
+
+  # Used by the AI infrastructure layer to call the FastAPI service.
+  http: ^1.2.2
+
+  dotenv: ^4.2.0
+
+  logging: ^1.3.0
+  # UUID v4 for entity primary keys.
+  uuid: ^4.5.1
+  # Collection helpers (deep equals, group-by, iterables).
+  collection: ^1.19.1
+  # Dart core meta-annotations (@immutable, @visibleForTesting).
+  meta: ^1.19.0
+  # Value-equality for domain entities without boilerplate.
+  equatable: ^2.0.7
+  # Functional result type — Either<Failure, T> error handling.
+  fpdart: ^1.1.0
+  # JSON-to-Dart annotations (consumed by json_serializable).
+  json_annotation: ^4.9.0
+
+# ─────────────────────────────────────────────────────────────
+# DEVELOPMENT DEPENDENCIES
+# ─────────────────────────────────────────────────────────────
+dev_dependencies:
+
+  # ── Code Generation ──────────────────────────────────────────
+  # Orchestrates all build_runner generators.
+  build_runner: ^2.4.12
+  # Generates fromJson / toJson for annotated model classes.
+  json_serializable: ^6.8.0
+
+  # ── Testing ─────────────────────────────────────────────────
+  test: ^1.25.6
+  # Generates mock classes for use-case and repository tests.
+  mockito: ^5.4.4
+
+  # ── Static Analysis ─────────────────────────────────────────
+  lints: ^6.0.0
+
+
+scripts:
+  dev: nodemon --watch lib --watch bin --exec "dart run bin/server.dart" --ext dart
+  start: dart run bin/server.dart
+  test: dart test
+  analyze: dart analyze
+  generate: dart run build_runner build --delete-conflicting-outputs

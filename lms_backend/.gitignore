@@ -1,0 +1,21 @@
+# Dart
+.dart_tool/
+build/
+.packages
+pubspec.lock
+
+# Editor and OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+
+# Secrets
+.env
+.env.*
+!.env.example
